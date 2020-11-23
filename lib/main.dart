@@ -72,12 +72,10 @@ class _MyHomePageState extends State<MyHomePage> {
       setState(() {});
       buttonval[a] = "O";
       curr = "O";
-      print(a);
     } else if (curr == "O") {
       setState(() {});
       buttonval[a] = "X";
       curr = "X";
-      print(a);
     }
     if (search(curr)) {
       won = curr;
@@ -113,6 +111,13 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
+  Widget butupdate(int m) {
+    return OutlineButton(
+      onPressed: () => buttonpress(m),
+      child: buttonval[m].isEmpty ? Text('') : Text(buttonval[m]),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -129,27 +134,15 @@ class _MyHomePageState extends State<MyHomePage> {
                 children: [
                   Container(
                     height: 85,
-                    child: OutlineButton(
-                      onPressed: () => buttonpress(0),
-                      child:
-                          buttonval[0].isEmpty ? Text('') : Text(buttonval[0]),
-                    ),
+                    child: butupdate(0),
                   ),
                   Container(
                     height: 85,
-                    child: OutlineButton(
-                      onPressed: () => buttonpress(1),
-                      child:
-                          buttonval[1].isEmpty ? Text('') : Text(buttonval[1]),
-                    ),
+                    child: butupdate(1),
                   ),
                   Container(
                     height: 85,
-                    child: OutlineButton(
-                      onPressed: () => buttonpress(2),
-                      child:
-                          buttonval[2].isEmpty ? Text('') : Text(buttonval[2]),
-                    ),
+                    child: butupdate(2),
                   ),
                 ],
               ),
@@ -160,27 +153,15 @@ class _MyHomePageState extends State<MyHomePage> {
                 children: [
                   Container(
                     height: 85,
-                    child: OutlineButton(
-                      onPressed: () => buttonpress(3),
-                      child:
-                          buttonval[3].isEmpty ? Text('') : Text(buttonval[3]),
-                    ),
+                    child: butupdate(3),
                   ),
                   Container(
                     height: 85,
-                    child: OutlineButton(
-                      onPressed: () => buttonpress(4),
-                      child:
-                          buttonval[4].isEmpty ? Text('') : Text(buttonval[4]),
-                    ),
+                    child: butupdate(4),
                   ),
                   Container(
                     height: 85,
-                    child: OutlineButton(
-                      onPressed: () => buttonpress(5),
-                      child:
-                          buttonval[5].isEmpty ? Text('') : Text(buttonval[5]),
-                    ),
+                    child: butupdate(5),
                   ),
                 ],
               ),
@@ -191,27 +172,15 @@ class _MyHomePageState extends State<MyHomePage> {
                 children: [
                   Container(
                     height: 85,
-                    child: OutlineButton(
-                      onPressed: () => buttonpress(6),
-                      child:
-                          buttonval[6].isEmpty ? Text('') : Text(buttonval[6]),
-                    ),
+                    child: butupdate(6),
                   ),
                   Container(
                     height: 85,
-                    child: OutlineButton(
-                      onPressed: () => buttonpress(7),
-                      child:
-                          buttonval[7].isEmpty ? Text('') : Text(buttonval[7]),
-                    ),
+                    child: butupdate(7),
                   ),
                   Container(
                     height: 85,
-                    child: OutlineButton(
-                      onPressed: () => buttonpress(8),
-                      child:
-                          buttonval[8].isEmpty ? Text('') : Text(buttonval[8]),
-                    ),
+                    child: butupdate(8),
                   ),
                 ],
               ),
