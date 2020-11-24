@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 void main() {
   runApp(MyApp());
@@ -11,7 +12,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.brown,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: MyHomePage(title: 'Tic Tac Toe'),
@@ -149,76 +150,22 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    decoration: box,
-                    height: 85,
-                    child: butupdate(0),
-                  ),
-                  Container(
-                    decoration: box,
-                    height: 85,
-                    child: butupdate(1),
-                  ),
-                  Container(
-                    decoration: box,
-                    height: 85,
-                    child: butupdate(2),
-                  ),
-                ],
-              ),
+        child: Container(
+          child: GridView.builder(
+            padding: EdgeInsets.all(10),
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 3,
+              mainAxisSpacing: 6,
+              crossAxisSpacing: 6,
+              childAspectRatio: 1,
             ),
-            Container(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    decoration: box,
-                    height: 85,
-                    child: butupdate(3),
-                  ),
-                  Container(
-                    decoration: box,
-                    height: 85,
-                    child: butupdate(4),
-                  ),
-                  Container(
-                    decoration: box,
-                    height: 85,
-                    child: butupdate(5),
-                  ),
-                ],
-              ),
+            itemCount: buttonval.length,
+            itemBuilder: (context, index) => SizedBox(
+              height: 10,
+              width: 10,
+              child: butupdate(index),
             ),
-            Container(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    decoration: box,
-                    height: 85,
-                    child: butupdate(6),
-                  ),
-                  Container(
-                    decoration: box,
-                    height: 85,
-                    child: butupdate(7),
-                  ),
-                  Container(
-                    decoration: box,
-                    height: 85,
-                    child: butupdate(8),
-                  ),
-                ],
-              ),
-            ),
-          ],
+          ),
         ),
       ),
     );
