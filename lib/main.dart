@@ -112,11 +112,35 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Widget butupdate(int m) {
-    return OutlineButton(
+    String i = buttonval[m];
+    return RaisedButton(
       onPressed: () => buttonpress(m),
-      child: buttonval[m].isEmpty ? Text('') : Text(buttonval[m]),
+      child: i.isEmpty
+          ? Text('')
+          : i == "X"
+              ? Text(
+                  i,
+                  style: TextStyle(color: Colors.black),
+                )
+              : Text(
+                  i,
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
+      color: i.isEmpty
+          ? Colors.grey
+          : i == "X"
+              ? Colors.red
+              : Colors.black,
     );
   }
+
+  final box = BoxDecoration(
+    border: Border.all(
+      color: Colors.white,
+    ),
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -133,14 +157,17 @@ class _MyHomePageState extends State<MyHomePage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
+                    decoration: box,
                     height: 85,
                     child: butupdate(0),
                   ),
                   Container(
+                    decoration: box,
                     height: 85,
                     child: butupdate(1),
                   ),
                   Container(
+                    decoration: box,
                     height: 85,
                     child: butupdate(2),
                   ),
@@ -152,14 +179,17 @@ class _MyHomePageState extends State<MyHomePage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
+                    decoration: box,
                     height: 85,
                     child: butupdate(3),
                   ),
                   Container(
+                    decoration: box,
                     height: 85,
                     child: butupdate(4),
                   ),
                   Container(
+                    decoration: box,
                     height: 85,
                     child: butupdate(5),
                   ),
@@ -171,14 +201,17 @@ class _MyHomePageState extends State<MyHomePage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
+                    decoration: box,
                     height: 85,
                     child: butupdate(6),
                   ),
                   Container(
+                    decoration: box,
                     height: 85,
                     child: butupdate(7),
                   ),
                   Container(
+                    decoration: box,
                     height: 85,
                     child: butupdate(8),
                   ),
