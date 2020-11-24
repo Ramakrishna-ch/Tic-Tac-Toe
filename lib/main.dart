@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.brown,
+        primarySwatch: Colors.red,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: MyHomePage(title: 'Tic Tac Toe'),
@@ -47,6 +47,7 @@ class _MyHomePageState extends State<MyHomePage> {
   ];
   String curr;
   String won;
+  int count = 0;
   bool search(String x) {
     if ((buttonval[0] == x && buttonval[1] == x && buttonval[2] == x) ||
         (buttonval[3] == x && buttonval[4] == x && buttonval[5] == x) ||
@@ -78,20 +79,20 @@ class _MyHomePageState extends State<MyHomePage> {
       buttonval[a] = "X";
       curr = "X";
     }
+
     if (search(curr)) {
       won = curr;
       _ackAlert(context);
     }
   }
 
-  void cleardat(BuildContext context) {
+  void cleardat() {
     setState(() {});
     won = null;
     curr = null;
     for (int i = 0; i < 9; i++) {
       buttonval[i] = '';
     }
-    Navigator.of(context).pop();
   }
 
   Future _ackAlert(BuildContext context) {
@@ -104,13 +105,19 @@ class _MyHomePageState extends State<MyHomePage> {
           actions: [
             FlatButton(
               child: Text('Close'),
-              onPressed: () => cleardat(context),
+              onPressed: () {
+                cleardat();
+                Navigator.of(context).pop();
+              },
             ),
           ],
         );
       },
     );
   }
+
+  final fontstyle =
+      TextStyle(color: Colors.white, fontSize: 40, fontWeight: FontWeight.bold);
 
   Widget butupdate(int m) {
     String i = buttonval[m];
@@ -121,13 +128,11 @@ class _MyHomePageState extends State<MyHomePage> {
           : i == "X"
               ? Text(
                   i,
-                  style: TextStyle(color: Colors.black),
+                  style: fontstyle,
                 )
               : Text(
                   i,
-                  style: TextStyle(
-                    color: Colors.white,
-                  ),
+                  style: fontstyle,
                 ),
       color: i.isEmpty
           ? Colors.grey
@@ -149,24 +154,34 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Container(
-          child: GridView.builder(
-            padding: EdgeInsets.all(10),
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 3,
-              mainAxisSpacing: 6,
-              crossAxisSpacing: 6,
-              childAspectRatio: 1,
-            ),
-            itemCount: buttonval.length,
-            itemBuilder: (context, index) => SizedBox(
-              height: 10,
-              width: 10,
-              child: butupdate(index),
+      body: Column(
+        children: <Widget>[
+          Expanded(
+            child: GridView.builder(
+              padding: EdgeInsets.all(10),
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3,
+                mainAxisSpacing: 6.0,
+                crossAxisSpacing: 6.0,
+                childAspectRatio: 1.0,
+              ),
+              itemCount: buttonval.length,
+              itemBuilder: (context, index) => SizedBox(
+                height: 10,
+                width: 10,
+                child: butupdate(index),
+              ),
             ),
           ),
-        ),
+          RaisedButton(
+            padding: EdgeInsets.all(10),
+            onPressed: cleardat,
+            child: Text(
+              'Reset',
+            ),
+            color: Colors.green,
+          ),
+        ],
       ),
     );
   }
