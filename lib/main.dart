@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
@@ -48,6 +50,7 @@ class _MyHomePageState extends State<MyHomePage> {
   String curr;
   String won;
   int count = 0;
+  bool multiplayer = false;
   bool search(String x) {
     if ((buttonval[0] == x && buttonval[1] == x && buttonval[2] == x) ||
         (buttonval[3] == x && buttonval[4] == x && buttonval[5] == x) ||
@@ -62,27 +65,70 @@ class _MyHomePageState extends State<MyHomePage> {
     return false;
   }
 
-  void buttonpress(int a) {
-    if (buttonval[a].isNotEmpty) {
-      return;
-    }
+  bool buttonpress(int a) {
     if (curr == null) {
       setState(() {});
       buttonval[a] = "X";
       curr = "X";
+      count++;
+      print('count is ${count}');
     } else if (curr == "X") {
       setState(() {});
       buttonval[a] = "O";
       curr = "O";
+      count++;
+      print('count is ${count}');
     } else if (curr == "O") {
       setState(() {});
       buttonval[a] = "X";
       curr = "X";
+      count++;
+      print('count is ${count}');
     }
 
     if (search(curr)) {
       won = curr;
       _ackAlert(context);
+      return true;
+    }
+    return false;
+  }
+
+  void automat() {
+    bool samp = false;
+    while (!samp) {
+      var random = Random();
+      int i = random.nextInt(9);
+      print(i);
+      if (buttonval[i].isEmpty) {
+        buttonpress(i);
+        samp = true;
+      }
+    }
+  }
+
+  void buttonpress1(int b) {
+    if (multiplayer) {
+      if (buttonval[b].isNotEmpty) {
+        return;
+      }
+      buttonpress(b);
+      if (count == 9) {
+        cleardat();
+      }
+    } else if (buttonpress(b)) {
+      if (count == 9) {
+        cleardat();
+      }
+      return;
+    } else if (count != 9) {
+      automat();
+      if (count == 9) {
+        cleardat();
+      }
+    } else {
+      cleardat();
+      return;
     }
   }
 
@@ -90,6 +136,7 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {});
     won = null;
     curr = null;
+    count = 0;
     for (int i = 0; i < 9; i++) {
       buttonval[i] = '';
     }
@@ -122,7 +169,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget butupdate(int m) {
     String i = buttonval[m];
     return RaisedButton(
-      onPressed: () => buttonpress(m),
+      onPressed: () => buttonpress1(m),
       child: i.isEmpty
           ? Text('')
           : i == "X"
@@ -156,6 +203,13 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Column(
         children: <Widget>[
+          Switch(
+              value: multiplayer,
+              onChanged: (val) {
+                setState(() {
+                  multiplayer = val;
+                });
+              }),
           Expanded(
             child: GridView.builder(
               padding: EdgeInsets.all(10),
