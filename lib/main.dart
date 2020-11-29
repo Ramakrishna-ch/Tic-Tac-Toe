@@ -117,9 +117,6 @@ class _MyHomePageState extends State<MyHomePage> {
         cleardat();
       }
     } else if (buttonpress(b)) {
-      if (count == 9) {
-        cleardat();
-      }
       return;
     } else if (count != 9) {
       automat();
