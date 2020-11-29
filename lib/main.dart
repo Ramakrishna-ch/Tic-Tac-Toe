@@ -71,19 +71,16 @@ class _MyHomePageState extends State<MyHomePage> {
       buttonval[a] = "X";
       curr = "X";
       count++;
-      print('count is ${count}');
     } else if (curr == "X") {
       setState(() {});
       buttonval[a] = "O";
       curr = "O";
       count++;
-      print('count is ${count}');
     } else if (curr == "O") {
       setState(() {});
       buttonval[a] = "X";
       curr = "X";
       count++;
-      print('count is ${count}');
     }
 
     if (search(curr)) {
